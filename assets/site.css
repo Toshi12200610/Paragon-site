@@ -1100,6 +1100,7 @@
       box-shadow: 0 20px 48px -36px rgba(0, 0, 0, 0.5);
     }
 
+    .about-chunk h2,
     .about-chunk h3 {
       font-family: "Syne", sans-serif;
       font-size: clamp(0.7rem, 1.1vw, 0.78rem);
@@ -1315,7 +1316,7 @@
         width: 100%;
       }
 
-      .team-block--profile .name,
+      .team-block--profile h2.name,
       .team-block--profile .role,
       .team-block--profile .bio {
         text-align: left;

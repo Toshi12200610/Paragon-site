@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paragon-entertainment.jp/sitemap.xml
