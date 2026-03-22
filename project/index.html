@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project — Paragon Entertainment." />
+  <title>Project — Paragon Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("no-motion");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../site.css" />
+  <script defer src="../site.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Paragon Entertainment</a>
+    <div class="header-tools">
+      <div class="header-tools__row header-tools__row--lang">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" id="langJa" data-set-lang="ja">JP</button>
+          <button type="button" class="lang-btn" id="langEn" data-set-lang="en">ENG</button>
+        </div>
+      </div>
+      <div class="header-tools__row header-tools__row--nav">
+        <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">Menu</button>
+        <nav id="siteNav" aria-label="Main">
+          <ul>
+            <li><a href="/">Top</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/project">Project</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="project" aria-labelledby="project-heading">
+      <h2 id="project-heading" class="display block-title reveal">Project</h2>
+      <div class="section-rule" aria-hidden="true"></div>
+
+      <div class="project-list reveal-stagger">
+        <article class="project-row reveal-item">
+          <div class="solo-house-preview-stack">
+            <h3 class="project-title project-title--logo">
+              <img src="/solo-house-logo.png" alt="Solo House" class="solo-house-logo solo-house-logo--project" width="880" height="220" loading="lazy" decoding="async" />
+            </h3>
+            <div class="series-brand">
+              <p class="series-brand__title">Rule of Desire</p>
+              <p class="series-brand__tagline i18n-ja">本能で恋をし、権力で選ばれる</p>
+              <p class="series-brand__tagline i18n-en">Love on instinct. Power decides who stays.</p>
+            </div>
+            <p class="soon solo-house-soon"><span class="i18n-ja i18n-inline">近日公開</span><span class="i18n-en i18n-inline">Coming Soon</span></p>
+          </div>
+          <div class="prose prose-gap reveal-item">
+            <p class="i18n-ja">
+              Paragon Entertainmentは、リアリティ番組を中心としたコンテンツIPの企画・制作・展開を行うIPスタジオです。
+            </p>
+            <p class="i18n-en">
+              Paragon Entertainment is a reality-first IP studio—development, production, and distribution locked in a single creative spine.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="reveal">
+    <div class="footer-col">
+      <div class="footer-meta i18n-ja">
+        <p>CEO：Toshiki Kuraoka</p>
+        <p>Paragon Entertainment株式会社、東京都渋谷区渋谷2丁目19番15号 宮益坂ビルディング609</p>
+      </div>
+      <div class="footer-meta i18n-en">
+        <p>CEO: Toshiki Kuraoka</p>
+        <p>Paragon Entertainment Inc., Miyamasuzaka Building 609, 2-19-15 Shibuya, Shibuya-ku, Tokyo</p>
+      </div>
+      <div class="footer-row footer-row--copyright">
+        <span class="i18n-ja">© Paragon Entertainment. All Rights Reserved.</span>
+        <span class="i18n-en">© Paragon Entertainment. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

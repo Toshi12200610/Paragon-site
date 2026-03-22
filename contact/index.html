@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact — Paragon Entertainment." />
+  <title>Contact — Paragon Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("no-motion");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../site.css" />
+  <script defer src="../site.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Paragon Entertainment</a>
+    <div class="header-tools">
+      <div class="header-tools__row header-tools__row--lang">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" id="langJa" data-set-lang="ja">JP</button>
+          <button type="button" class="lang-btn" id="langEn" data-set-lang="en">ENG</button>
+        </div>
+      </div>
+      <div class="header-tools__row header-tools__row--nav">
+        <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">Menu</button>
+        <nav id="siteNav" aria-label="Main">
+          <ul>
+            <li><a href="/">Top</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/project">Project</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="display block-title reveal">Contact</h2>
+      <div class="section-rule" aria-hidden="true"></div>
+
+      <p class="contact-lead reveal">
+        <span class="i18n-ja contact-lead__line">Paragon Entertainmentは、コンテンツ制作、パートナーシップ、投資、採用など、さまざまな形でのコラボレーションを歓迎しています。</span>
+        <span class="i18n-en contact-lead__line">Paragon welcomes collaborations across production, partnerships, investment, and talent—if you’re building something ambitious, we want to hear it.</span>
+      </p>
+
+      <p class="contact-lead reveal">
+        <a href="mailto:info@paragon-entertainment.jp" class="contact-lead__line">info@paragon-entertainment.jp</a>
+      </p>
+
+      <div class="contact-block" id="contactFlow">
+        <div id="contactStepForm" class="contact-step">
+          <form id="contactForm" class="contact-form reveal-stagger" novalidate>
+            <div class="form-field reveal-item">
+              <label for="inquiryType"><span class="i18n-ja">カテゴリ</span><span class="i18n-en">Category</span><span class="req" aria-hidden="true">*</span></label>
+              <select id="inquiryType" name="inquiryType" required>
+                <option value="" disabled selected class="opt-placeholder" data-placeholder-ja="選択してください" data-placeholder-en="Select">選択してください</option>
+                <option value="PRODUCTION / PROJECT">PRODUCTION / PROJECT</option>
+                <option value="SPONSORSHIP / BRAND PARTNERSHIP">SPONSORSHIP / BRAND PARTNERSHIP</option>
+                <option value="INVESTMENT">INVESTMENT</option>
+                <option value="CAREERS">CAREERS</option>
+                <option value="OTHER">OTHER</option>
+              </select>
+            </div>
+
+            <div class="form-field reveal-item" role="group" aria-labelledby="applicantLabel">
+              <span id="applicantLabel" class="label-text"><span class="i18n-ja">区分</span><span class="i18n-en">Type</span><span class="req" aria-hidden="true">*</span></span>
+              <div class="radio-row">
+                <label><input type="radio" name="applicantKind" value="organization" required /> <span class="i18n-ja i18n-inline">法人・団体</span><span class="i18n-en i18n-inline">Organization</span></label>
+                <label><input type="radio" name="applicantKind" value="individual" /> <span class="i18n-ja i18n-inline">個人</span><span class="i18n-en i18n-inline">Individual</span></label>
+              </div>
+            </div>
+
+            <div class="form-field reveal-item">
+              <label for="companyName"><span class="i18n-ja">企業名・団体名</span><span class="i18n-en">Organization</span></label>
+              <input type="text" id="companyName" name="companyName" autocomplete="organization" data-placeholder-ja="該当する場合のみ" data-placeholder-en="If applicable" placeholder="該当する場合のみ" />
+            </div>
+
+            <div class="form-row-2 reveal-item">
+              <div class="form-field">
+                <label for="fullName"><span class="i18n-ja">お名前</span><span class="i18n-en">Name</span><span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="fullName" name="fullName" required autocomplete="name" />
+              </div>
+              <div class="form-field">
+                <label for="email"><span class="i18n-ja">メールアドレス</span><span class="i18n-en">Email</span><span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" required autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-field reveal-item">
+              <label for="phone"><span class="i18n-ja">電話番号（任意）</span><span class="i18n-en">Phone (optional)</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+
+            <div class="form-field reveal-item">
+              <label for="purpose"><span class="i18n-ja">メッセージ</span><span class="i18n-en">Message</span><span class="req" aria-hidden="true">*</span></label>
+              <textarea id="purpose" name="purpose" required data-placeholder-ja="ご用件・ご相談内容をご記入ください" data-placeholder-en="Tell us what you’re building or exploring" placeholder="ご用件・ご相談内容をご記入ください"></textarea>
+            </div>
+
+            <div class="form-actions reveal-item">
+              <button type="button" class="form-submit" id="btnToConfirm"><span class="i18n-ja">確認画面へ</span><span class="i18n-en">Continue to review</span></button>
+            </div>
+          </form>
+          <p class="contact-note reveal">
+            <span class="i18n-ja contact-lead__line">内容によりご返信までお時間をいただく場合がございます。あらかじめご了承ください。</span>
+            <span class="i18n-en contact-lead__line">Response times may vary depending on inquiry volume.</span>
+          </p>
+        </div>
+
+        <div id="contactStepConfirm" class="contact-step" hidden>
+          <h3 class="block-title" style="font-size: clamp(1.25rem, 3vw, 1.75rem); margin-bottom: 1.25rem">
+            <span class="i18n-ja">内容確認</span><span class="i18n-en">Review your message</span>
+          </h3>
+          <div class="confirm-panel" id="confirmPanel" aria-live="polite"></div>
+          <div class="confirm-actions">
+            <button type="button" class="form-submit form-submit--secondary" id="btnConfirmBack"><span class="i18n-ja">修正する</span><span class="i18n-en">Edit</span></button>
+            <button type="button" class="form-submit" id="btnConfirmSend"><span class="i18n-ja">送信する</span><span class="i18n-en">Send</span></button>
+          </div>
+          <p class="form-error" id="formSendError" hidden></p>
+        </div>
+
+        <div id="contactStepThanks" class="contact-step" hidden>
+          <div id="thanksDefault">
+            <p class="contact-thanks i18n-ja">お問い合わせありがとうございました。内容を確認のうえ、担当よりメールにてご返信いたします。お返事までにお時間をいただく場合がございますので、あらかじめご了承ください。</p>
+            <p class="contact-thanks i18n-en">Thank you for your inquiry. We will review your message and respond to you by email in due course. Please note that it may take some time before you hear from us.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="reveal">
+    <div class="footer-col">
+      <div class="footer-meta i18n-ja">
+        <p>CEO：Toshiki Kuraoka</p>
+        <p>Paragon Entertainment株式会社、東京都渋谷区渋谷2丁目19番15号 宮益坂ビルディング609</p>
+      </div>
+      <div class="footer-meta i18n-en">
+        <p>CEO: Toshiki Kuraoka</p>
+        <p>Paragon Entertainment Inc., Miyamasuzaka Building 609, 2-19-15 Shibuya, Shibuya-ku, Tokyo</p>
+      </div>
+      <div class="footer-row footer-row--copyright">
+        <span class="i18n-ja">© Paragon Entertainment. All Rights Reserved.</span>
+        <span class="i18n-en">© Paragon Entertainment. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
