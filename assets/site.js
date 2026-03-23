@@ -268,6 +268,27 @@
         if (stepC && !stepC.hidden && typeof window._paragonRefillConfirm === "function") {
           window._paragonRefillConfirm();
         }
+
+        // TOP hero: language toggle can temporarily hide in-progress animations.
+        // Force re-start so hero text never gets stuck at opacity:0 after JP<->ENG.
+        try {
+          if (!root.classList.contains("no-motion")) {
+            var hero = document.getElementById("top");
+            if (hero) {
+              var wrap = c === "en" ? hero.querySelector(".i18n-en") : hero.querySelector(".i18n-ja");
+              if (wrap) {
+                window.requestAnimationFrame(function () {
+                  wrap.querySelectorAll(".hero-intro, .hero-chunk, .hero-word").forEach(function (el) {
+                    el.style.animation = "none";
+                    // Force reflow so the next animation start is applied.
+                    void el.getBoundingClientRect();
+                    el.style.animation = "";
+                  });
+                });
+              }
+            }
+          }
+        } catch (e) {}
       }
 
       var saved = "ja";
