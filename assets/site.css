@@ -12,6 +12,8 @@
       --ease-out-long: cubic-bezier(0.16, 1, 0.3, 1);
       --solo-magenta: #e91e78;
       --solo-magenta-soft: rgba(233, 30, 120, 0.88);
+      --brand-gold: #d89a00;
+      --brand-gold-soft: rgba(216, 154, 0, 0.86);
     }
 
     *,
@@ -830,7 +832,7 @@
       width: 100%;
       max-width: 11rem;
       border-radius: 1px;
-      background: linear-gradient(90deg, var(--solo-magenta), rgba(255, 255, 255, 0.55) 45%, transparent 100%);
+      background: linear-gradient(90deg, var(--brand-gold), rgba(255, 255, 255, 0.55) 45%, transparent 100%);
       transform-origin: left center;
       transform: scaleX(0);
       animation: heroAccentBar 1.35s var(--ease-out-long) 0.55s forwards;
@@ -843,7 +845,7 @@
       width: min(14rem, 70vw);
       height: 14px;
       margin-top: -7px;
-      background: radial-gradient(ellipse at 0% 50%, rgba(233, 30, 120, 0.35), transparent 70%);
+      background: radial-gradient(ellipse at 0% 50%, rgba(216, 154, 0, 0.38), transparent 70%);
       opacity: 0;
       animation: heroAccentGlow 1.8s var(--ease-out-long) 0.4s forwards;
       pointer-events: none;
