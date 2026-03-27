@@ -366,7 +366,6 @@
       var hero = document.getElementById("top");
       var heroMedia = document.getElementById("heroMedia");
       var heroVideo = document.getElementById("heroVideo");
-      var heroPlayBtn = document.getElementById("heroPlayBtn");
       var glow = document.getElementById("heroGlow");
       var scrollCue = document.getElementById("heroScrollCue");
       var spotlight = document.getElementById("heroSpotlight");
@@ -384,7 +383,7 @@
           if (switched) return;
           switched = true;
           heroMedia.classList.add("is-after");
-          heroMedia.classList.remove("is-blocked");
+          heroMedia.classList.remove("is-loop");
         }
 
         function retireMediaLayer() {
@@ -392,21 +391,21 @@
           heroMedia.style.pointerEvents = "none";
         }
 
-        function showPlayGate() {
+        function showLoopFallback() {
           if (switched) return;
-          heroMedia.classList.add("is-blocked");
+          heroMedia.classList.add("is-loop");
+          // After a short auto-loop, merge into the final still.
+          window.setTimeout(function () {
+            if (!didPlay) switchToAfter();
+          }, 3600);
         }
 
-        function hidePlayGate() {
-          heroMedia.classList.remove("is-blocked");
-        }
-
-        // If autoplay fails (common on iOS / Low Power Mode), ask for a tap-to-play gesture.
+        // If autoplay fails (common on iOS / Low Power Mode), show an automatic loop animation fallback.
         try {
           var p = heroVideo.play();
           if (p && typeof p.catch === "function") {
             p.catch(function () {
-              showPlayGate();
+              showLoopFallback();
             });
           }
         } catch (e) {}
@@ -414,15 +413,15 @@
         // If the browser doesn't enter "playing" quickly, autoplay was likely blocked.
         heroVideo.addEventListener("playing", function () {
           didPlay = true;
-          hidePlayGate();
+          heroMedia.classList.remove("is-loop");
         });
         window.setTimeout(function () {
-          if (!didPlay && !switched) showPlayGate();
+          if (!didPlay && !switched) showLoopFallback();
         }, 900);
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {
-          showPlayGate();
+          showLoopFallback();
         });
 
         // Fade slightly before the end so the after-image feels continuous.
@@ -447,28 +446,6 @@
           { passive: true }
         );
 
-        function tryPlayWithGesture() {
-          if (switched) return;
-          try {
-            heroVideo.muted = true;
-            heroVideo.playsInline = true;
-            var pp = heroVideo.play();
-            if (pp && typeof pp.catch === "function") {
-              pp.catch(function () {
-                showPlayGate();
-              });
-            }
-          } catch (e) {
-            showPlayGate();
-          }
-        }
-
-        if (heroPlayBtn) {
-          heroPlayBtn.addEventListener("click", function (ev) {
-            ev.preventDefault();
-            tryPlayWithGesture();
-          });
-        }
       }
 
       function splitHeroTitle(h1) {
