@@ -380,6 +380,9 @@
         var switched = false;
         var didPlay = false;
         var didAdvance = false;
+        var isMobile =
+          (window.matchMedia && window.matchMedia("(max-width: 768px)").matches) ||
+          (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
         function switchToAfter() {
           if (switched) return;
           switched = true;
@@ -392,8 +395,13 @@
           heroMedia.style.pointerEvents = "none";
         }
 
-        function showLoopFallback() {
+        function showFallback() {
           if (switched) return;
+          // On mobile in Low Power Mode, prefer still image (most reliable + lightest).
+          if (isMobile) {
+            switchToAfter();
+            return;
+          }
           heroMedia.classList.add("is-loop");
           // After a short auto-loop, merge into the final still.
           window.setTimeout(function () {
@@ -406,7 +414,7 @@
           var p = heroVideo.play();
           if (p && typeof p.catch === "function") {
             p.catch(function () {
-              showLoopFallback();
+              showFallback();
             });
           }
         } catch (e) {}
@@ -423,7 +431,7 @@
         });
 
         window.setTimeout(function () {
-          if (!didPlay && !switched) showLoopFallback();
+          if (!didPlay && !switched) showFallback();
         }, 900);
 
         // If we didn't advance within a short window, fall back to loop even if 'playing' fired.
@@ -432,13 +440,13 @@
           if (switched) return;
           var nowT = heroVideo.currentTime || 0;
           if (!didAdvance || nowT <= startT + 0.02 || heroVideo.paused) {
-            showLoopFallback();
+            showFallback();
           }
         }, 1300);
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {
-          showLoopFallback();
+          showFallback();
         });
 
         // Fade slightly before the end so the after-image feels continuous.
