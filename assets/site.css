@@ -875,6 +875,85 @@
       transform: translateY(calc(var(--hero-progress) * -6px - 3px));
     }
 
+    /* Home: hero video -> image transition */
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: #000;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.9s var(--ease-out-long);
+    }
+
+    body.is-hero-scrolled .hero-media {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-media__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    /* Hide Runway watermark area (bottom-right) */
+    .hero-media__runway-mask {
+      position: absolute;
+      right: clamp(0.4rem, 1.2vw, 0.9rem);
+      bottom: clamp(0.4rem, 1.2vw, 0.9rem);
+      width: clamp(5.1rem, 14vw, 7.6rem);
+      height: clamp(1.55rem, 4.4vw, 2.15rem);
+      background: #000;
+      border-radius: 0.3rem;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.95);
+    }
+
+    .hero-media__after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      transition: opacity 1.05s var(--ease-out-long);
+      background: #000;
+    }
+
+    .hero-media__after-img {
+      width: min(64vmin, 28rem);
+      height: auto;
+      object-fit: contain;
+      opacity: 0.98;
+      transform: translateY(8px) scale(0.985);
+      filter:
+        drop-shadow(0 0 28px rgba(216, 154, 0, 0.28))
+        drop-shadow(0 0 64px rgba(216, 154, 0, 0.18));
+      transition:
+        transform 1.2s var(--ease-out-long),
+        filter 1.2s var(--ease-out-long),
+        opacity 1.2s var(--ease-out-long);
+    }
+
+    .hero-media.is-after .hero-media__after {
+      opacity: 1;
+    }
+
+    .hero-media.is-after .hero-media__video {
+      opacity: 0;
+      transition: opacity 0.65s var(--ease-out-long);
+    }
+
+    .hero-media.is-after .hero-media__after-img {
+      transform: translateY(0) scale(1);
+      filter:
+        drop-shadow(0 0 40px rgba(216, 154, 0, 0.34))
+        drop-shadow(0 0 96px rgba(216, 154, 0, 0.22));
+    }
+
     .hero-title.hero-title--split.is-hero-settled {
       position: relative;
     }

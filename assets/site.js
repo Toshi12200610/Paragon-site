@@ -364,6 +364,8 @@
       }
 
       var hero = document.getElementById("top");
+      var heroMedia = document.getElementById("heroMedia");
+      var heroVideo = document.getElementById("heroVideo");
       var glow = document.getElementById("heroGlow");
       var scrollCue = document.getElementById("heroScrollCue");
       var spotlight = document.getElementById("heroSpotlight");
@@ -371,6 +373,43 @@
 
       if (hero) {
         document.body.classList.add("is-home");
+      }
+
+      // Hero video -> image transition (TOP only)
+      if (hero && heroMedia && heroVideo) {
+        var switched = false;
+        function switchToAfter() {
+          if (switched) return;
+          switched = true;
+          heroMedia.classList.add("is-after");
+        }
+
+        // If autoplay fails, don't block the hero content.
+        try {
+          var p = heroVideo.play();
+          if (p && typeof p.catch === "function") {
+            p.catch(function () {
+              heroMedia.style.opacity = "0";
+              heroMedia.style.pointerEvents = "none";
+            });
+          }
+        } catch (e) {}
+
+        heroVideo.addEventListener("ended", switchToAfter);
+        heroVideo.addEventListener("error", function () {
+          heroMedia.style.opacity = "0";
+          heroMedia.style.pointerEvents = "none";
+        });
+
+        // Fade slightly before the end so the after-image feels continuous.
+        heroVideo.addEventListener("timeupdate", function () {
+          if (switched) return;
+          var d = heroVideo.duration;
+          if (!d || !isFinite(d)) return;
+          if (d - heroVideo.currentTime <= 0.45) {
+            switchToAfter();
+          }
+        });
       }
 
       function splitHeroTitle(h1) {
