@@ -1,0 +1,23 @@
+{
+  "name": "Paragon Entertainment",
+  "short_name": "Paragon",
+  "start_url": "/contact",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/contact-favicon-192.png?v=20260328c2",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/contact-favicon-512.png?v=20260328c2",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
