@@ -366,6 +366,7 @@
       var hero = document.getElementById("top");
       var heroMedia = document.getElementById("heroMedia");
       var heroVideo = document.getElementById("heroVideo");
+      var heroPlayBtn = document.getElementById("heroPlayBtn");
       var glow = document.getElementById("heroGlow");
       var scrollCue = document.getElementById("heroScrollCue");
       var spotlight = document.getElementById("heroSpotlight");
@@ -378,10 +379,12 @@
       // Hero video -> image transition (TOP only)
       if (hero && heroMedia && heroVideo) {
         var switched = false;
+        var didPlay = false;
         function switchToAfter() {
           if (switched) return;
           switched = true;
           heroMedia.classList.add("is-after");
+          heroMedia.classList.remove("is-blocked");
         }
 
         function retireMediaLayer() {
@@ -389,28 +392,37 @@
           heroMedia.style.pointerEvents = "none";
         }
 
-        // If autoplay fails (common on iOS / Low Power Mode), show the after image instead.
+        function showPlayGate() {
+          if (switched) return;
+          heroMedia.classList.add("is-blocked");
+        }
+
+        function hidePlayGate() {
+          heroMedia.classList.remove("is-blocked");
+        }
+
+        // If autoplay fails (common on iOS / Low Power Mode), ask for a tap-to-play gesture.
         try {
           var p = heroVideo.play();
           if (p && typeof p.catch === "function") {
             p.catch(function () {
-              switchToAfter();
+              showPlayGate();
             });
           }
         } catch (e) {}
 
-        // If the browser doesn't enter "playing" quickly, assume playback is blocked and fall back.
-        var didPlay = false;
+        // If the browser doesn't enter "playing" quickly, autoplay was likely blocked.
         heroVideo.addEventListener("playing", function () {
           didPlay = true;
+          hidePlayGate();
         });
         window.setTimeout(function () {
-          if (!didPlay && !switched) switchToAfter();
+          if (!didPlay && !switched) showPlayGate();
         }, 900);
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {
-          switchToAfter();
+          showPlayGate();
         });
 
         // Fade slightly before the end so the after-image feels continuous.
@@ -435,26 +447,28 @@
           { passive: true }
         );
 
-        // Allow tap to attempt playback on mobile. If it still fails, keep after image.
-        heroMedia.addEventListener(
-          "click",
-          function () {
-            if (switched) return;
-            try {
-              heroVideo.muted = true;
-              heroVideo.playsInline = true;
-              var pp = heroVideo.play();
-              if (pp && typeof pp.catch === "function") {
-                pp.catch(function () {
-                  switchToAfter();
-                });
-              }
-            } catch (e) {
-              switchToAfter();
+        function tryPlayWithGesture() {
+          if (switched) return;
+          try {
+            heroVideo.muted = true;
+            heroVideo.playsInline = true;
+            var pp = heroVideo.play();
+            if (pp && typeof pp.catch === "function") {
+              pp.catch(function () {
+                showPlayGate();
+              });
             }
-          },
-          { passive: true }
-        );
+          } catch (e) {
+            showPlayGate();
+          }
+        }
+
+        if (heroPlayBtn) {
+          heroPlayBtn.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            tryPlayWithGesture();
+          });
+        }
       }
 
       function splitHeroTitle(h1) {

@@ -961,6 +961,38 @@
       filter: blur(2.2px);
     }
 
+    .hero-media__play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-media.is-blocked .hero-media__play {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-media__play:hover,
+    .hero-media__play:focus-visible {
+      box-shadow: 0 0 20px rgba(216, 154, 0, 0.3);
+      outline: none;
+    }
+
     .hero-media__after {
       position: absolute;
       inset: 0;
