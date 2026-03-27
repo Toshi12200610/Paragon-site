@@ -389,7 +389,7 @@
           heroMedia.style.pointerEvents = "none";
         }
 
-        // If autoplay fails (common on iOS), show the after image instead of hiding the whole layer.
+        // If autoplay fails (common on iOS / Low Power Mode), show the after image instead.
         try {
           var p = heroVideo.play();
           if (p && typeof p.catch === "function") {
@@ -398,6 +398,15 @@
             });
           }
         } catch (e) {}
+
+        // If the browser doesn't enter "playing" quickly, assume playback is blocked and fall back.
+        var didPlay = false;
+        heroVideo.addEventListener("playing", function () {
+          didPlay = true;
+        });
+        window.setTimeout(function () {
+          if (!didPlay && !switched) switchToAfter();
+        }, 900);
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {

@@ -85,16 +85,19 @@
   <main>
     <section id="top" aria-labelledby="hero-heading">
       <div class="hero-media" id="heroMedia" aria-hidden="true">
-        <video
-          class="hero-media__video"
-          id="heroVideo"
-          src="/hero-runway.mp4"
-          playsinline
-          muted
-          autoplay
-          preload="auto"
-        ></video>
-        <div class="hero-media__runway-mask" aria-hidden="true"></div>
+        <div class="hero-media__frame" aria-hidden="true">
+          <video
+            class="hero-media__video"
+            id="heroVideo"
+            src="/hero-runway.mp4"
+            poster="/hero-after.png"
+            playsinline
+            muted
+            autoplay
+            preload="auto"
+          ></video>
+          <div class="hero-media__runway-mask" aria-hidden="true"></div>
+        </div>
         <div class="hero-media__after" aria-hidden="true">
           <img
             src="/hero-after.png"

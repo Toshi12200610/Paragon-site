@@ -884,6 +884,8 @@
       overflow: hidden;
       opacity: 1;
       transition: opacity 0.9s var(--ease-out-long);
+      display: grid;
+      place-items: center;
     }
 
     body.is-hero-scrolled .hero-media {
@@ -891,23 +893,31 @@
       pointer-events: none;
     }
 
+    .hero-media__frame {
+      position: relative;
+      width: min(86vmin, 42rem);
+      max-width: 92vw;
+      aspect-ratio: 1 / 1;
+      background: #000;
+      overflow: hidden;
+    }
+
     .hero-media__video {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       background: #000;
       filter: saturate(1.05) contrast(1.02);
+      display: block;
     }
 
     /* Hide Runway watermark area (bottom-right) */
     .hero-media__runway-mask {
       position: absolute;
-      right: clamp(0.4rem, 1.2vw, 0.9rem);
-      bottom: clamp(0.4rem, 1.2vw, 0.9rem);
-      width: clamp(5.1rem, 14vw, 7.6rem);
-      height: clamp(1.55rem, 4.4vw, 2.15rem);
+      right: 4%;
+      bottom: 4%;
+      width: 22%;
+      height: 7%;
       background: #000;
       border-radius: 0.3rem;
       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.95);
