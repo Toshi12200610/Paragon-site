@@ -379,6 +379,7 @@
       if (hero && heroMedia && heroVideo) {
         var switched = false;
         var didPlay = false;
+        var didAdvance = false;
         function switchToAfter() {
           if (switched) return;
           switched = true;
@@ -415,9 +416,25 @@
           didPlay = true;
           heroMedia.classList.remove("is-loop");
         });
+
+        // Track whether playback actually progresses (some modes briefly fire 'playing' then stall at t=0).
+        heroVideo.addEventListener("timeupdate", function () {
+          if (heroVideo.currentTime > 0.1) didAdvance = true;
+        });
+
         window.setTimeout(function () {
           if (!didPlay && !switched) showLoopFallback();
         }, 900);
+
+        // If we didn't advance within a short window, fall back to loop even if 'playing' fired.
+        var startT = heroVideo.currentTime || 0;
+        window.setTimeout(function () {
+          if (switched) return;
+          var nowT = heroVideo.currentTime || 0;
+          if (!didAdvance || nowT <= startT + 0.02 || heroVideo.paused) {
+            showLoopFallback();
+          }
+        }, 1300);
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {
