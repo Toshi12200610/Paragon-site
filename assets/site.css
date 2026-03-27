@@ -924,7 +924,9 @@
     }
 
     .hero-media__after-img {
-      width: min(64vmin, 28rem);
+      width: min(86vmin, 42rem);
+      max-width: 92vw;
+      max-height: min(72vh, 42rem);
       height: auto;
       object-fit: contain;
       opacity: 0.98;

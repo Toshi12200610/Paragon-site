@@ -384,21 +384,24 @@
           heroMedia.classList.add("is-after");
         }
 
-        // If autoplay fails, don't block the hero content.
+        function retireMediaLayer() {
+          heroMedia.style.opacity = "0";
+          heroMedia.style.pointerEvents = "none";
+        }
+
+        // If autoplay fails (common on iOS), show the after image instead of hiding the whole layer.
         try {
           var p = heroVideo.play();
           if (p && typeof p.catch === "function") {
             p.catch(function () {
-              heroMedia.style.opacity = "0";
-              heroMedia.style.pointerEvents = "none";
+              switchToAfter();
             });
           }
         } catch (e) {}
 
         heroVideo.addEventListener("ended", switchToAfter);
         heroVideo.addEventListener("error", function () {
-          heroMedia.style.opacity = "0";
-          heroMedia.style.pointerEvents = "none";
+          switchToAfter();
         });
 
         // Fade slightly before the end so the after-image feels continuous.
@@ -410,6 +413,39 @@
             switchToAfter();
           }
         });
+
+        // If the user scrolls past the hero, we can retire the layer.
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!switched && (window.scrollY || window.pageYOffset) < 10) return;
+            if (document.body.classList.contains("is-hero-scrolled")) {
+              retireMediaLayer();
+            }
+          },
+          { passive: true }
+        );
+
+        // Allow tap to attempt playback on mobile. If it still fails, keep after image.
+        heroMedia.addEventListener(
+          "click",
+          function () {
+            if (switched) return;
+            try {
+              heroVideo.muted = true;
+              heroVideo.playsInline = true;
+              var pp = heroVideo.play();
+              if (pp && typeof pp.catch === "function") {
+                pp.catch(function () {
+                  switchToAfter();
+                });
+              }
+            } catch (e) {
+              switchToAfter();
+            }
+          },
+          { passive: true }
+        );
       }
 
       function splitHeroTitle(h1) {
