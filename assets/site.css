@@ -1113,19 +1113,6 @@
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 1rem;
-      animation: heroKickerGlow 4s ease-in-out infinite;
-    }
-
-    @keyframes heroKickerGlow {
-      0%,
-      100% {
-        opacity: 1;
-        letter-spacing: 0.3em;
-      }
-      50% {
-        opacity: 0.72;
-        letter-spacing: 0.36em;
-      }
     }
 
     .solo-house-preview-stack {
@@ -1144,7 +1131,7 @@
 
     .preview-block:hover .solo-house-preview-stack {
       border-color: rgba(255, 255, 255, 0.22);
-      box-shadow: 0 0 36px -20px rgba(233, 30, 120, 0.18);
+      box-shadow: 0 12px 40px -28px rgba(0, 0, 0, 0.45);
     }
 
     .solo-house-soon {
@@ -1165,54 +1152,43 @@
     }
 
     .solo-house-heading {
+      margin: clamp(0.65rem, 1.6vh, 0.9rem) 0 0;
+      line-height: 1.2;
+    }
+
+    .solo-house-name {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.88rem, 2.2vw, 1.15rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg);
       margin: 0;
+    }
+
+    .solo-house-key-visual {
+      margin: 0;
+      width: 100%;
+      max-width: 36rem;
+      border-radius: 1px;
+      overflow: hidden;
       line-height: 0;
     }
 
-    .series-brand {
-      margin-top: clamp(0.85rem, 2vh, 1.15rem);
-      max-width: 36rem;
-    }
-
-    .series-brand__title {
-      font-family: "Syne", sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.82rem, 2.1vw, 1.2rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--solo-magenta);
-      margin: 0 0 0.45rem;
-      text-shadow: 0 0 22px rgba(233, 30, 120, 0.4);
-    }
-
-    .series-brand__tagline {
-      font-size: clamp(0.8rem, 1.65vw, 0.95rem);
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--solo-magenta-soft);
-      margin: 0;
-      line-height: 1.7;
-    }
-
-    .solo-house-logo {
+    .solo-house-key-visual__img {
       display: block;
-      height: auto;
       width: 100%;
-      max-width: min(100%, 22rem);
-      transition: filter 0.55s var(--ease), transform 0.55s var(--ease);
+      height: auto;
+      vertical-align: top;
+      transition: transform 0.55s var(--ease), opacity 0.55s var(--ease);
     }
 
-    .solo-house-logo--project {
-      max-width: min(100%, 18rem);
+    .solo-house-key-visual__img--project {
+      max-width: 100%;
     }
 
-    .preview-block:hover .solo-house-logo {
-      filter: drop-shadow(0 0 28px rgba(236, 72, 153, 0.35));
+    .preview-block:hover .solo-house-key-visual__img--preview {
       transform: translateY(-2px);
-    }
-
-    .preview-block:hover .series-brand__title {
-      text-shadow: 0 0 26px rgba(233, 30, 120, 0.45);
     }
 
     .block-title {
@@ -1360,25 +1336,24 @@
       margin-bottom: 0.85rem;
     }
 
-    .project-title--logo .solo-house-logo {
-      max-width: min(100%, 16rem);
+    .project-title--solo {
+      line-height: 1.2;
+      margin: clamp(0.55rem, 1.5vh, 0.85rem) 0 0.65rem;
     }
 
-    .project-row .series-brand {
-      margin-top: clamp(0.65rem, 1.8vh, 1rem);
+    .project-title--solo .solo-house-name {
+      font-size: clamp(1.65rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: none;
     }
 
-    .project-row:hover .project-title:not(.project-title--logo) {
+    .project-row:hover .project-title:not(.project-title--logo):not(.project-title--solo) {
       text-shadow: 0 0 36px rgba(255, 255, 255, 0.1);
     }
 
-    .project-row:hover .project-title--logo .solo-house-logo {
-      filter: drop-shadow(0 0 22px rgba(236, 72, 153, 0.3));
+    .project-row:hover .solo-house-key-visual__img--project {
       transform: translateY(-1px);
-    }
-
-    .project-row:hover .series-brand__title {
-      text-shadow: 0 0 22px rgba(233, 30, 120, 0.4);
     }
 
     .project-row .soon {
@@ -1395,7 +1370,7 @@
 
     .project-row:hover .solo-house-preview-stack {
       border-color: rgba(255, 255, 255, 0.26);
-      box-shadow: 0 0 40px -22px rgba(233, 30, 120, 0.2);
+      box-shadow: 0 12px 44px -26px rgba(0, 0, 0, 0.4);
     }
 
     .project-row:hover .solo-house-soon {
@@ -1791,14 +1766,13 @@
       }
     }
 
-    @keyframes heroLogoFloat {
-      0%, 100% {
+    @keyframes heroKeyVisualFloat {
+      0%,
+      100% {
         transform: translateY(0);
-        filter: drop-shadow(0 0 0 transparent);
       }
       50% {
-        transform: translateY(-7px);
-        filter: drop-shadow(0 14px 36px rgba(233, 30, 120, 0.28));
+        transform: translateY(-5px);
       }
     }
 
@@ -1825,8 +1799,8 @@
       animation-timing-function: var(--ease-out-long);
     }
 
-    .solo-house-logo--preview {
-      animation: heroLogoFloat 8s ease-in-out infinite;
+    .solo-house-key-visual__img--preview {
+      animation: heroKeyVisualFloat 8s ease-in-out infinite;
       animation-delay: 1.5s;
     }
 
@@ -2068,9 +2042,8 @@
       filter: none;
     }
 
-    html.no-motion .solo-house-logo--preview {
+    html.no-motion .solo-house-key-visual__img--preview {
       animation: none;
-      filter: none;
     }
 
     html.no-motion .hero-fx__mesh,
@@ -2192,14 +2165,9 @@
       .team-block:hover {
         transform: none;
       }
-      .preview-block:hover .solo-house-logo,
-      .project-row:hover .project-title--logo .solo-house-logo {
+      .preview-block:hover .solo-house-key-visual__img--preview,
+      .project-row:hover .solo-house-key-visual__img--project {
         transform: none;
-        filter: none;
-      }
-      .preview-block:hover .series-brand__title,
-      .project-row:hover .series-brand__title {
-        text-shadow: none;
       }
       .form-submit:hover,
       .form-submit:focus-visible {
@@ -2223,9 +2191,8 @@
         clip-path: none;
         filter: none;
       }
-      .solo-house-logo--preview {
+      .solo-house-key-visual__img--preview {
         animation: none;
-        filter: none;
       }
       .hero-fx__mesh,
       .hero-fx__mesh--slow,
